@@ -44,6 +44,9 @@ const ActivityContainer = () => {
     <Container>
       <Dialog open={showDialog}>
         <Form onSubmit={(e) => handleSubmit(e)}>
+          <Button onClick={() => setShowDialog(false)} className="close">
+            ×
+          </Button>
           <h1>Add Activity</h1>
           <Label htmlFor="activityName">Name</Label>
           <Input id="activityName" name="activityName" type="text" />

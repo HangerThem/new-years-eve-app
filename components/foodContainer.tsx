@@ -40,6 +40,9 @@ const FoodContainer = () => {
     <Container>
       <Dialog open={showDialog}>
         <Form onSubmit={(e) => handleSubmit(e)}>
+          <Button onClick={() => setShowDialog(false)} className="close">
+            ×
+          </Button>
           <h1>Add Food</h1>
           <Label htmlFor="foodName">Name</Label>
           <Input id="foodName" name="foodName" type="text" />

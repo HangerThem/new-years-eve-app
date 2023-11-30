@@ -40,6 +40,9 @@ const ThemeContainer = () => {
     <Container>
       <Dialog open={showDialog}>
         <Form onSubmit={(e) => handleSubmit(e)}>
+          <Button onClick={() => setShowDialog(false)} className="close">
+            ×
+          </Button>
           <h1>Add Theme</h1>
           <Label htmlFor="themeName">Name</Label>
           <Input id="themeName" name="themeName" type="text" />

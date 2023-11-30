@@ -1,11 +1,12 @@
 import styled from "styled-components"
 
 export const Container = styled.section`
-  flex: 1;
   border: 1px solid rgb(var(--white));
   border-radius: 5px;
   height: fit-content;
   padding: 20px;
+  width: 100%;
+  flex: 1 1 350px;
 
   h2 {
     margin: 0;
@@ -31,6 +32,8 @@ export const Container = styled.section`
       p {
         margin: 0;
         padding: 5px 0;
+        width: 100%;
+        word-break: break-all;
       }
       border-bottom: 1px solid rgb(var(--white));
       margin-bottom: 10px;
@@ -49,6 +52,12 @@ export const Dialog = styled.dialog`
   margin: 0;
   max-width: 350px;
   width: calc(100% - 5rem);
+`
+
+export const DialogHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `
 
 export const Form = styled.form`
@@ -85,5 +94,14 @@ export const Button = styled.button`
     width: 25px;
     height: 25px;
     padding: 0;
+  }
+
+  &.close {
+    color: rgb(var(--festive-red));
+    background-color: transparent;
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 `

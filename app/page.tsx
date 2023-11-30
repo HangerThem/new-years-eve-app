@@ -38,7 +38,7 @@ export default function Home() {
     <>
       <header>
         <h1>New Year&apos;s Eve</h1>
-        <p>{countdown !== null ? formatTime(countdown) : "Loading..."}</p>
+        <p>{countdown !== null ? formatTime(countdown) : null}</p>
       </header>
       <main>
         <ThemeContainer />
