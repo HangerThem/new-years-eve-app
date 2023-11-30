@@ -1,95 +1,51 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client"
+
+import { useState, useEffect } from "react"
+import ThemeContainer from "@/components/themeContainer"
+import FoodContainer from "@/components/foodContainer"
+import DrinkContainer from "@/components/drinkContainer"
+import ActivityContainer from "@/components/activityContainer"
+import ScheduleContainer from "@/components/scheduleContainer"
 
 export default function Home() {
+  const targetDate = new Date("2023-12-31T23:00:00.000Z").getTime()
+  const [countdown, setCountdown] = useState<number | null>(null)
+
+  useEffect(() => {
+    setCountdown(targetDate - Date.now())
+    const interval = setInterval(() => {
+      setCountdown(targetDate - Date.now())
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [targetDate])
+
+  const formatTime = (time: number) => {
+    const days = Math.floor(time / (1000 * 60 * 60 * 24))
+    const hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+    const minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60))
+    const seconds = Math.floor((time % (1000 * 60)) / 1000)
+
+    let timeString = ""
+    if (days > 0) timeString += `${days} days `
+    if (hours > 0 || days > 0) timeString += `${hours} hours `
+    if (minutes > 0 || hours > 0) timeString += `${minutes} minutes `
+    if (seconds > 0 || minutes > 0) timeString += `${seconds} seconds`
+
+    return timeString.trim() + " until 2024"
+  }
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    <>
+      <header>
+        <h1>New Year&apos;s Eve</h1>
+        <p>{countdown !== null ? formatTime(countdown) : "Loading..."}</p>
+      </header>
+      <main>
+        <ThemeContainer />
+        <FoodContainer />
+        <DrinkContainer />
+        <ActivityContainer />
+      </main>
+    </>
   )
 }
