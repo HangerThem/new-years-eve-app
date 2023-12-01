@@ -6,8 +6,9 @@ import FoodContainer from "@/components/foodContainer"
 import DrinkContainer from "@/components/drinkContainer"
 import ActivityContainer from "@/components/activityContainer"
 import ScheduleContainer from "@/components/scheduleContainer"
+import withAuth from "@/hoc/withAuth"
 
-export default function Home() {
+function Home() {
   const targetDate = new Date("2023-12-31T23:00:00.000Z").getTime()
   const [countdown, setCountdown] = useState<number | null>(null)
 
@@ -49,3 +50,5 @@ export default function Home() {
     </>
   )
 }
+
+export default withAuth(Home)
